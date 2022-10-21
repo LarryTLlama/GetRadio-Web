@@ -10,7 +10,7 @@ app.all((req, res) => {
 app.get('/api/v1/stream/', (req, res) => {
 let param = req.query.q;
 console.log('Stream URL: ', param)
-req.pipe(request.get(param)).pipe(res)
+request.get(param).pipe(res)
 /*.then((result) => {
     console.log(result.data)
     res.status(200);
