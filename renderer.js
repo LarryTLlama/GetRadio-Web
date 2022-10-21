@@ -1,21 +1,29 @@
  let notiAllow = null; 
+ function inAppNoti(content, colour) {
+	if(colour == "red") document.getElementById('notis').innerHTML += `<button style="width: 100%; text-align: center;" id="coolcancelbutton"><p>${content}</p></button>`;
+	if(colour == "green") document.getElementById('notis').innerHTML += `<button style="width: 100%; text-align: center;" id="coolsavebutton"><p>${content}</p></button>`;
+	setTimeout(() => {
+		document.getElementById('notis').innerHTML = '';
+	}, 3000)
+ }
+
+ function addCookie(val) {
+	if(val == true) {
+	document.cookie = "notifications=true";
+	} else {
+	document.cookie = "notifications=true";
+	}
+ }
  window.onload = onload();
 async function onload() {
+	
+	if(!document.cookie) {
+		document.cookie = "notifications=true";
+		//document.getElementById('saver').innerHTML += `<button style="width: 100%; text-align: center;" id="coolcancelbutton"><p>Send notifications on every new track?</p><br><a href="javascipt:addCookie(true)">Yes! </a> <a href="javascript:addCookie(false)> No!</a> </button>`;
+	}
+	console.log(document.cookie)
 	notiAllow = await Notification.requestPermission();
   
-  /*function getCountry() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position) {
-        $.getJSON('http://ws.geonames.org/countryCode', {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-            type: 'JSON'
-        }, function(result) {
-            return result.countryName;
-        });
-    })
-  }
-  }*/
   $.getJSON( "https://de1.api.radio-browser.info/json/stations/topclick/20", function( data ) {
 	var arr = [];
 data.forEach(myFunction);
@@ -72,7 +80,7 @@ function myFunction(item, index) {
 let np = null;
 let lastMeta = '';
 function player(uuid) {
-	$.getJSON('http://de1.api.radio-browser.info/json/stations/byuuid/' + uuid, (res) => {
+	$.getJSON('https://de1.api.radio-browser.info/json/stations/byuuid/' + uuid, (res) => {
 		console.log(uuid + `${res}`)
 		if(np) np.stop();
 		document.getElementById('songy').innerText = res[0].name;
@@ -83,10 +91,12 @@ function player(uuid) {
 			document.getElementById("track").innerText = metadata.StreamTitle || "No song data provided";
 		   
 			if(metadata.StreamTitle == '') return;
-			const greeting = new Notification(res[0].name,{
+			if(document.cookie == "notifications=true") {
+			new Notification(res[0].name,{
 				body: metadata.StreamTitle,
 				icon: res[0].favicon
 			});
+		}
 			
 		};
 		np = new IcecastMetadataPlayer( '/api/v1/stream/?q=' + res[0].url, { onMetadata } );
@@ -107,4 +117,14 @@ if(np.state == "playing") {
 } else {
 	return;
 }
+}
+
+function cookie() {
+	if(document.cookie == "notifications=true") {
+		document.cookie = "notifications=false";
+		inAppNoti('Stopped push notifications (you might need to refresh)!', 'red');
+	} else {
+		document.cookie = "notifications=true";
+		inAppNoti('Added push notifications (you might need to refresh)! Enjoy! ', 'green');
+	}
 }

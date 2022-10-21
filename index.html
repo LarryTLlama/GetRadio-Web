@@ -11,7 +11,7 @@
 <script src="jquery.js"></script>
 <script src="js.js"></script>
 
-    <title>GetRadio</title>
+    <title>GetRadio - WebApp</title>
 
 	<!--Must include the following in EVERY page!-->
 <script src="icecast-metadata-player-1.13.1.min.js"></script>
@@ -28,6 +28,14 @@
   <ul style="position: fixed; " id="menu">
         <li class="active"><a href="javascript:redirect('index2.html')"><img style="min-height: 22px; padding-top: 12.5px; width: 130px;" src="Black-No-Background.png"> </img></a></li>
 		<li class="left"><a href="javascript:redirect('searchpage.html')">Search</a></li>
+    <li>
+      <a href="#">More <i class="fa fa-caret-down"></i></a>
+      <ul id="hidden2" class="hidden">
+          <li> <a href="javascript:cookie()">Edit Push Notifications</a></li>
+          <li><a href="javascript:window.open('https://larrytllama.github.io/GetRadio')">Website <i class="fa fa-sign-out"></i></a></li>
+  <li><a href="javascript:window.open('https://larrytllama.github.io/GetRadio/privacy.html')">Privacy Policy <i class="fa fa-sign-out"></i></a></li>
+      </ul>
+  </li>
 		<li style="padding: 0px; float: right;"><a id="closebtn">Get App</a></li>
     <script>
     document.getElementById('closebtn').addEventListener('click', () => {
@@ -213,6 +221,9 @@
 <br><br>
 
 <div id="saver">
+  <div id="notis">
+
+  </div>
 <button style="width: 100%; text-align: center;" id="coolcancelbutton"><p><i class="fa-solid fa-cookie-bite"></i> Yo! We use cookies to remember some stuff. Read more <a href="https://larrytllama.github.io/GetRadio/privacy.html">here!</a></a></p></button>
   </div>
 <div>
