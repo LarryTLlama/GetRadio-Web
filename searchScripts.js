@@ -4,7 +4,7 @@ async function searcher(term) {
 	if(`${term}` == 'undefined') return;
 	//window.electronAPI.jsonFile('/playerInfo.json')	
 
-	var newurl = "http://de1.api.radio-browser.info/json/stations/byname/" + term;
+	var newurl = "https://de1.api.radio-browser.info/json/stations/byname/" + term;
 	
 	$.getJSON(newurl , function( data ) {
 		
