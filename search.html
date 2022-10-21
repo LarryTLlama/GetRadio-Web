@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <!--<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'"></meta>-->
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="js.js"></script>
+<!--Must include the following in EVERY page!-->
+<script src="icecast-metadata-player-1.11.14.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@json-editor/json-editor@latest/dist/jsoneditor.min.js"></script>
+<script src="shareScripts.js"></script>
+<!--Done! Yaaaaaaaaay-->
+    <title>GetRadio</title>
+
+	<link rel="icon" type="image/x-icon" href="favicon.ico">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<!--<script src="player.js"></script>-->
+	
+  </head>
+  <body>
+	<script src="searchScripts.js"></script>
+ <!--Start NEW Navbar-->
+  <ul style="position: fixed; " id="menu">
+        <li class="active"><a href="index.html"><img style="min-height: 22px; padding-top: 12.5px; width: 130px;" src="Black-No-Background.png"> </img></a></li>
+		<li class="left"><a href="index.html#popular">Popular</a></li>
+		<li class="left"><a href="index.html#recent">Recents</a></li>
+		<li class="left"><a href="index.html">Search</a></li>
+		<li style="padding: 0px; float: right;"><a id="closebtn"><i class="fa fa-times"></i></a></li>
+		<li style="padding: 0px; float: right;"><a id="max-btn"><i class="fa fa-square"></i></a></li>
+		<li style="padding: 0px; float: right;"><a id="min-btn"><i class="fa fa-solid fa-window-minimize"></i></a></li>
+    </ul>
+  <!--End NEW Navbar-->
+<div id="content" style="padding-left:16px">
+<!--All other body stuff goes in here, so it looks nice!-->
+  <br>
+  <br>
+  <br>
+  <div id="content">
+  <div id="res">
+  <h2 id="SearchName">Searching for ...</h2>
+  
+  <p>Taking a while? Try <a href="javascript:reload()">refreshing the page</a></p>
+  </div>
+  <div id="saver">
+	<a id="widthSetter" href="javascript:redirect(index2.html)"><button style="width: 100%; text-align: center;" id="coolcancelbutton"><h2><i class="fa fa-arrow-left"></i> Back to Home</h2></button></a>
+  </div>
+  </div>
+</div>
+<!--End of body stuff (No more after this!)-->
+</div>
+</div>
+<!--Audio Player-->
+<div id="audioPlayer" class="floaty">
+<div class="container-audio">
+<div id="toTheLeft" class="playerFav">
+	<img style="height: 75px; width: auto;" src="./placeholder.png" id="radFav" class="left"></img>
+</div>
+<div id="toTheLeft">
+	
+	<strong><p id="track" >GetRadio</p></strong>
+	
+	<p id="songy" >GetRadio</p>     
+	</div>
+	<div id="toTheRight">
+	<a class="audioPlayerClass2" href="javascript:spotifySearch()"><i class="fa fa-spotify" aria-hidden="true"></i> Search track in <strong>Spotify</strong></a>
+	<br>
+	<br>
+	<a class="audioPlayerClassGoogle" href="javascript:googleSearch()"><i class="fa fa-google" aria-hidden="true"></i> Find track on <strong>Google</strong></a>
+	<br>
+	<br>
+	<a class="audioPlayerClassShare" href="javascript:share()"><i class="fa fa-share-alt" aria-hidden="true"></i> <strong>Share</strong> this station</a>
+	</div>
+	<div id="toTheRight2">
+	<a href="javascript:pause()" class="audioPlayerClass2" id="audioPlayerPlayButton"><i id="pauseplaybutton" class="fa fa-pause-circle"></i></a>
+	</div>
+	
+	</div>
+
+<!--Javascript sets correct uuid stuff, so it plays it correctly-->
+  </body>
+</html>

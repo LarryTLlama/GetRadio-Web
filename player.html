@@ -1,0 +1,143 @@
+<html style="border-radius: 5px; background-color: #000000; -webkit-app-region: drag; overflow: hidden;">
+
+<head>
+	<script src="js.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/fontawesome.min.css">-->
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&display=swap');
+
+body {
+	font-family: 'Raleway', sans-serif;
+	
+}
+
+#container {
+float: center;
+color: white;
+margin: auto;
+font-size: 16px;
+word-spacing: 5px;
+}
+
+a {
+-webkit-app-region: no-drag;
+color: white;
+text-decoration: none;
+}
+
+/*#song {
+ position: absolute;
+ margin: 0;
+ line-height: 20px;
+ text-align: left;
+ /* Starting position 
+ -moz-transform:translateX(100%);
+ -webkit-transform:translateX(100%);	
+ transform:translateX(100%);
+ /* Apply animation to this element 
+ -moz-animation: scroll-left 15s linear infinite;
+ -webkit-animation: scroll-left 15s linear infinite;
+ animation: scroll-left 15s linear infinite;
+}*/
+/* Move it (define the animation) */
+@-moz-keyframes scroll-left {
+ 0%   { -moz-transform: translateX(100%); }
+ 100% { -moz-transform: translateX(-100%); }
+}
+@-webkit-keyframes scroll-left {
+ 0%   { -webkit-transform: translateX(100%); }
+ 100% { -webkit-transform: translateX(-100%); }
+}
+@keyframes scroll-left {
+ 0%   { 
+ -moz-transform: translateX(100%); /* Browser bug fix */
+ -webkit-transform: translateX(100%); /* Browser bug fix */
+ transform: translateX(100%); 		
+ }
+ 100% { 
+ -moz-transform: translateX(-100%); /* Browser bug fix */
+ -webkit-transform: translateX(-100%); /* Browser bug fix */
+ transform: translateX(-100%); 
+ }
+}
+
+</style>
+<title>MiniPlayer</title>
+</head>
+<body style="border: 2px white; border-radius: 10px;">
+<div style="float:left;">
+<img id="fav" style="height: 100px; border-radius: 5px;" src="placeholder.png">
+</img>
+</div>
+<div style="float: left;" id="details">
+<p id="song" style="position: absolute; margin-left: 16px; margin-top: 5px; color: white; white-space: nowrap;">Loading...</p><br>
+<p id="station" style= "padding-left: 16px; margin-top: 26px; color: white; white-space: nowrap;">Loading...</p>
+<div id="controls">
+<div id="container">
+
+<p style="padding-left: 16px;">
+<!--Play/Pause, fa fa-pause -->
+<script>
+async function pause() {
+	if(document.getElementById('pauseplaybutton').className === 'fa fa-play') {	
+	window.main.jsonFile('/playerInfo.json')	
+	var json = await window.main.jsonGet()
+	if(json.info.uuid) {
+	document.getElementById('pauseplaybutton').className = 'fa fa-pause'
+	window.main.jsonSet('info.wantPlay', 'true')
+	console.log(json.info.uuid);
+	return window.main.station(json.info.uuid);
+	}
+	}
+	window.main.jsonFile('/playerInfo.json')
+	window.main.pause()
+	document.getElementById('pauseplaybutton').className = 'fa fa-play'
+	window.main.jsonSet('info.isPlaying', 'false')
+	window.main.jsonSet('info.wantPlay', 'false')
+	
+}
+</script>
+<a href="javascript:pause()"><i id='pauseplaybutton' class="fa fa-play" aria-hidden="true"></i></a>
+<!--Close MiniPlayer-->
+<script>
+function close() {
+window.main.close();
+}
+</script>
+<a href="javascript:close()"><i class="fa fa-times" aria-hidden="true"></i></a>
+<!--Always On Top-->
+<script>
+function setTop() {
+window.main.setMiniTop();
+}
+</script>
+<a href="javascript:setTop()"><i class="fa fa-thumb-tack" aria-hidden="true"></i></a>
+</p>
+</div>
+</div>
+</div>
+<script>
+window.onload = async function() {
+window.main.jsonFile('/playerInfo.json')	
+var json = await window.main.jsonGet()
+if(json.info.isPlaying === "true") {
+document.getElementById('pauseplaybutton').className = 'fa fa-pause';
+}
+window.main.onMeta((_event, metadata, name, fav) => {
+document.getElementById('song').innerHTML = metadata.title;
+document.getElementById('station').innerHTML = name;
+document.getElementById('fav').src = fav;
+window.main.onPlay((__event) => {
+document.getElementById('pauseplaybutton').className = 'fa fa-pause';
+})
+
+window.main.onPause((__event) => {
+document.getElementById('pauseplaybutton').className = 'fa fa-play';
+})
+})
+}
+</script>
+</body>
+</html>

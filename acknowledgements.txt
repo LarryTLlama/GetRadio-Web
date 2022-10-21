@@ -1,0 +1,20 @@
+In the code...
+ElectronJS and the NodeJs Foundation (for app building stuff)
+StackOverflow for a ton of answers and code snippets (too many to name)
+Mpg123 - The GetRadio audio manager. Making the actual player possible!
+radio-browser.info - The free open radio station api, for which none of this would be possible without!
+Various packages from NPM:
+axios (getting info from api)
+discord-rpc (allowing us to share on discord)
+edit-json-file (easy editing of the local settings stuff)
+electron-packager (for making it an actual app)
+node-internet-radio (fetching of song data reliably)
+play-sound (allowing me to play the audio to the local audio player)
+
+In the brand...
+Coolvetica - A free font used in the GetRadio logo
+Lato and Raleway fonts - From google fonts used throughout the app.
+And all the radio stations for doing their thing, whatever their thing is!
+
+Interested in making your own app?
+Learn a bit of HTML and Javascript, and look at electronjs!

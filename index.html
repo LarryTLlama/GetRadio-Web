@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <!--<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'"></meta>-->
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="jquery.js"></script>
+<script src="js.js"></script>
+
+    <title>GetRadio</title>
+
+	<!--Must include the following in EVERY page!-->
+<script src="icecast-metadata-player-1.13.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@json-editor/json-editor@latest/dist/jsoneditor.min.js"></script>
+<script src="shareScripts.js"></script>
+<script src="searchScripts.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="renderer.js"></script>
+<!--Done! Yaaaaaaaaay-->
+	<link rel="icon" type="image/x-icon" href="favicon.ico">
+  </head>
+  <body>
+  <!--Start NEW Navbar-->
+  <ul style="position: fixed; " id="menu">
+        <li class="active"><a href="javascript:redirect('index2.html')"><img style="min-height: 22px; padding-top: 12.5px; width: 130px;" src="Black-No-Background.png"> </img></a></li>
+		<li class="left"><a href="javascript:redirect('searchpage.html')">Search</a></li>
+		<li style="padding: 0px; float: right;"><a id="closebtn">Get App</a></li>
+    <script>
+    document.getElementById('closebtn').addEventListener('click', () => {
+      window.open('https://larrytllama.github.io/GetRadio#download')
+    })
+    </script>
+    </ul>
+  <!--End NEW Navbar-->
+<div id="content" style="padding:16px">
+
+<!--All other body stuff goes in here, so it looks nice!-->
+  <br>
+  <br>
+  <br>
+  <h2>Welcome back to GetRadio!</h2>
+  <p>Which <strong>radio station</strong> today?</p>
+  <a href="javascript:redirect('searchpage.html')"><button style="width: 20%; text-align: center;" id="coolsavebutton"><h2>Go to Search <i class="fa fa-arrow-right"></i></h2></button></a>
+<!-- Radio-Browser's most popular readings -->
+<div id="doWeNeedToTakeABreak">
+<br><br>
+
+<h2>Top in the UK:</h2>
+
+
+<div class="grid">
+  <button class="step arrow-right">
+  <a href="javascript:player('96200095-0601-11e8-ae97-52543be04c81', true)" style="color: white; text-decoration: none;">
+  <div class="left"> 
+  <img class="bimg" src="https://assets6.capitalfm.com/2016/11/capital-3d-network-logo-large-canvas-1458228638-herowidev4-0.jpg"></img>
+  </div>
+  <div class="right"> 
+  <h2 >Capital</h2>
+  <p>Tags: Pop, Charts, Top 40<br>
+  Country: GB (United Kingdom)<br>
+  Language: English</p>
+  <p class="hiddenText" id="uuid0"></p>
+  </div>
+  </a>
+  </button>
+  <button class="step arrow-down">
+  <a href='javascript:player("a726a172-4cc2-4076-b283-a950218ed0c2", true)' style="color: white; text-decoration: none;">
+  <div class="left"> 
+  <img class="bimg" src="https://cdn-radiotime-logos.tunein.com/s24939q.png"></img>
+  </div>
+  <div class="right"> 
+  <h2 >BBC Radio 1</h2>
+  <p >Tags: Pop, Top 40, Charts, BBC<br>
+  Country: GB (United Kingdom)<br>
+  Language: English</p>
+  <p class="hiddenText" id="uuid1"></p>
+  </div>
+  </a>
+  </button>
+  <button class="step">
+  <a href="javascript:player('dfc40123-a738-40db-9b5a-a9d01e4b245b', true)" style="color: white; text-decoration: none;">
+  <div class="left"> 
+  <img class="bimg" src="https://rmp.files.bbci.co.uk/rmp-shared-assets/1.4.0/img/network-logos/national/bbc_radio_two_colour.svg"></img>
+  </div>
+  <div class="right"> 
+  <h2 >BBC Radio 2</h2>
+  <p>Tags: Classics, BBC<br>
+  Country: GB (United Kingdom)<br>
+  Language: English</p>
+  <p class="hiddenText" id="uuid2"></p>
+  </div>
+  </a>
+  </button>
+  <button class="step">
+  <a href="javascript:player('df3607fb-311d-43b1-bd0c-98d91a4f2df4', true)"style="color: white; text-decoration: none;">
+  <div class="left"> 
+  <img class="bimg" src="https://upload.wikimedia.org/wikipedia/en/b/bc/CapitalDanceLogo.png"></img>
+  </div>
+  <div class="right"> 
+  <h2>Capital Dance</h2>
+  <p>Tags: Dance, Pop<br>
+  Country: GB (United Kingdom)<br>
+  Language: English</p>
+  <p class="hiddenText" id="uuid3"></p>
+  </div>
+  </a>
+  </button>
+</div>
+
+<div class="takeabreak"></div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+<h2>Popular today:</h2>
+
+
+
+<div id="popular" class="grid">
+  <button class="step arrow-right">
+  <a id="feat0" style="color: white; text-decoration: none;">
+  <div class="left"> 
+  <img id="radioFav0" class="bimg" src="./placeholder.png"></img>
+  </div>
+  <div class="right"> 
+  <h2 id="title0" >Radio</h2>
+  <p id="content0">Tags: Very Cool<br>
+  Country: GB (United Kingdom)<br>
+  Language: English</p>
+  <p class="hiddenText" id="uuid0"></p>
+  </div>
+  </a>
+  </button>
+  <button class="step arrow-down">
+  <a id="feat1" style="color: white; text-decoration: none;">
+  <div class="left"> 
+  <img id="radioFav1" class="bimg" src="./placeholder.png"></img>
+  </div>
+  <div class="right"> 
+  <h2 id="title1">Radio</h2>
+  <p id="content1">Tags: Very Cool<br>
+  Country: GB (United Kingdom)<br>
+  Language: English</p>
+  <p class="hiddenText" id="uuid1"></p>
+  </div>
+  </a>
+  </button>
+  <button class="step">
+  <a id="feat2" style="color: white; text-decoration: none;">
+  <div class="left"> 
+  <img id="radioFav2" class="bimg" src="./placeholder.png"></img>
+  </div>
+  <div class="right"> 
+  <h2 id="title2" >Radio</h2>
+  <p id="content2">Tags: Very Cool<br>
+  Country: GB (United Kingdom)<br>
+  Language: English</p>
+  <p class="hiddenText" id="uuid2"></p>
+  </div>
+  </a>
+  </button>
+  <button class="step">
+  <a id="feat3" style="color: white; text-decoration: none;">
+  <div class="left"> 
+  <img id="radioFav3" class="bimg" src="./placeholder.png"></img>
+  </div>
+  <div class="right"> 
+  <h2 id="title3">Radio</h2>
+  <p id="content3">Tags: Very Cool<br>
+  Country: GB (United Kingdom)<br>
+  Language: English</p>
+  <p class="hiddenText" id="uuid3"></p>
+  </div>
+  </a>
+  </button>
+  <button class="step arrow-down">
+  <a id="feat4" style="color: white; text-decoration: none;">
+  <div class="left"> 
+  <img id="radioFav4" class="bimg" src="./placeholder.png"></img>
+  </div>
+  <div class="right"> 
+  <h2 id="title4">Radio</h2>
+  <p id="content4">Tags: Very Cool<br>
+  Country: GB (United Kingdom)<br>
+  Language: English</p>
+  <p class="hiddenText" id="uuid4"></p>
+  </div>
+  </a>
+  </button>
+  <button class="step arrow-down">
+  <a id="feat5" style="color: white; text-decoration: none;">
+  <div class="left"> 
+  <img id="radioFav5" class="bimg" src="./placeholder.png"></img>
+  </div>
+  <div class="right"> 
+  <h2 id="title5">Radio</h2>
+  <p id="content5">Tags: Very Cool<br>
+  Country: GB (United Kingdom)<br>
+  Language: English</p>
+  <p class="hiddenText" id="uuid5"></p>
+  </div>
+  </a>
+  </button>
+</div>
+<br><br>
+
+<div id="saver">
+	<a id="widthSetter" href="javascript:redirect('index2.html')"><button style="width: 100%; text-align: center;" id="coolcancelbutton"><p><i class="fa-solid fa-cookie-bite"></i> Yo! We use cookies to remember some stuff. Read more <a href="https://larrytllama.github.io/GetRadio/privacy.html">here!</a></a></p></button></a>
+  </div>
+<div>
+
+
+
+<br><br><br>
+<!--End of body stuff (No more after this!)-->
+</div>
+</div>
+<!--Leaves some space so the audio player doesn't cover the bottom bit of the page up-->
+</div>
+
+<footer style="height: 125px; margin-top: 250px;"></footer>
+
+<!--Audio Player-->
+<div id="audioPlayer" class="floaty">
+<div class="container-audio">
+<div id="toTheLeft" class="playerFav">
+	<img style="height: 75px; width: auto;" src="./placeholder.png" id="radFav" class="left"></img>
+</div>
+<div id="toTheLeft">
+	
+	<strong><p id="track" >GetRadio</p></strong>
+	
+	<p id="songy" >GetRadio</p>     
+	</div>
+	<div id="toTheRight">
+	<a class="audioPlayerClass2" href="javascript:spotifySearch()"><i class="fa fa-spotify" aria-hidden="true"></i> Search track in <strong>Spotify</strong></a>
+	<br>
+	<br>
+	<a class="audioPlayerClassGoogle" href="javascript:googleSearch()"><i class="fa fa-google" aria-hidden="true"></i> Find track on <strong>Google</strong></a>
+	<br>
+	<br>
+	<a class="audioPlayerClassShare" href="javascript:share()"><i class="fa fa-share-alt" aria-hidden="true"></i> <strong>Share</strong> this station</a>
+	</div>
+	<div id="toTheRight2">
+	<a href="javascript:playpause()" class="audioPlayerClass2" id="audioPlayerPlayButton"><i id="pauseplaybutton" class="fa fa-pause-circle"></i></a>
+	</div>
+	
+	</div>
+  </body>
+</html>

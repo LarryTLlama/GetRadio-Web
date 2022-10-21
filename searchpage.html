@@ -1,0 +1,29 @@
+<br><br>
+<h1>Search</h1>
+<div class="form">
+    <input href="javascript:redirect('searchpage.html', document.getElementById('input').value)" type="text" id="input" class="query"
+     placeholder="Search for a station..."
+     aria-label="Search for a station...">
+      <a href="javascript:redirect('searchpage.html', document.getElementById('input').value)"><i class="fa fa-search" id="searchIco" aria-hidden="true"></i></a>
+  </div>
+  <script>
+  // catch enter code in search form in front page
+  $('.form').keyup(function (e) {
+      var str = $('.query').val();
+      if (e.keyCode == 13) {
+        document.getElementById('res').innerHTML = `<h2>Searching! Please wait.</h2>
+<p>If this takes a while, reload the page and try again with a shorter phrase.</p>`
+          if(str == '') return;
+          console.log('Search', str)
+          searcher(str)
+      }
+  });
+  </script>
+  <br><br>
+<div id="res">
+
+</div>
+
+<div id="saver">
+	<a id="widthSetter" href="javascript:redirect('index2.html')"><button style="width: 100%; text-align: center;" id="coolcancelbutton"><h2><i class="fa fa-arrow-left"></i> Back to Home</h2></button></a>
+  </div>
