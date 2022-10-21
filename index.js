@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const axios = require('axios');
 const path = require('path');
-const request = require('request');
+const http = require('http');
 
 app.all((req, res) => {
     console.log(req.originalUrl)
@@ -10,7 +10,7 @@ app.all((req, res) => {
 app.get('/api/v1/stream/', (req, res) => {
 let param = req.query.q;
 console.log('Stream URL: ', param)
-request.get(param).pipe(res)
+http.get(param).pipe(res)
 /*.then((result) => {
     console.log(result.data)
     res.status(200);
