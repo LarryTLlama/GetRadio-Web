@@ -91,14 +91,14 @@ function player(uuid) {
 		document.getElementById('songy').innerText = res[0].name;
 		document.getElementById('radFav').src = res[0].favicon;
 		function onMetadata(metadata) {
-			if(lastMeta == metadata.title) return;
-			lastMeta = metadata.title;
-			document.getElementById("track").innerText = metadata.title || "No song data provided";
+			if(lastMeta == metadata.StreamTitle) return;
+			lastMeta = metadata.StreamTitle;
+			document.getElementById("track").innerText = metadata.StreamTitle || "No song data provided";
 		   
 			if(metadata.title == '') return;
 			if(document.cookie == "notifications=true") {
 			new Notification(res[0].name,{
-				body: metadata.title,
+				body: metadata.StreamTitle,
 				icon: res[0].favicon
 			});
 		}
