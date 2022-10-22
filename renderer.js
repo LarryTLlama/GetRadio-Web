@@ -108,7 +108,8 @@ function player(uuid) {
 	  	np.play();
 		fetchInterval = setInterval(() => {
 			$.getJSON('https://protective-third-hedge.glitch.me/api/v1/metadata?q=' + res[0].url.replace('https://', 'http://'), (response) => {
-				onMetadata(response.data)
+				console.log(response)
+				onMetadata(response)
 			})
 		}, 5000)
 	})
