@@ -1,8 +1,8 @@
 const express = require('express');
 const app = express();
-const axios = require('axios');
 const path = require('path');
 const request = require('request');
+var internetradio = require('node-internet-radio')
 
 app.all((req, res) => {
     console.log(req.originalUrl)
@@ -42,11 +42,12 @@ icy.get(req.query.q, (res) => {
 })
 
 app.get('/api/v1/metadata', (req, res) => {
-  icy.get(req.query.q, (rest) => {
-    rest.on('metadata', (metadata) => {
-      res.status(200).json(icy.parse(metadata))
-    })
-  })
+  internetradio.getStationInfo(req.query.q, function(error, station) {
+    if(error) {
+        res.json({error: `${error}`})
+    }
+    res.json(station)
+  });
 })
 
 app.get('/', (req, res) => {

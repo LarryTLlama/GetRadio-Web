@@ -93,14 +93,14 @@ function player(uuid) {
 		np = new IcecastMetadataPlayer( 'api/v1/stream?q=' + res[0].url.replace('https://', 'http://'), { onMetadata } );
 		np.play();
 		function onMetadata(metadata) {
-			if(lastMeta == metadata.StreamTitle) return;
-			lastMeta = metadata.StreamTitle;
-			document.getElementById("track").innerText = metadata.StreamTitle || "No song data provided";
+			if(lastMeta == metadata.title) return;
+			lastMeta = metadata.title;
+			document.getElementById("track").innerText = metadata.title || "No song data provided";
 		   
 			if(metadata.title == '') return;
 			if(document.cookie == "notifications=true") {
 			new Notification(res[0].name,{
-				body: metadata.StreamTitle,
+				body: metadata.title,
 				icon: res[0].favicon
 			});
 		}
