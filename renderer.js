@@ -105,16 +105,13 @@ function player(uuid) {
 			
 		};
 		np = new IcecastMetadataPlayer( 'https://protective-third-hedge.glitch.me/api/v1/stream?q=' + res[0].url.replace('https://', 'http://'), { onMetadata } );
-	  np.play();
-	fetchInterval = setInterval(() => {
-		$.getJSON('https://protective-third-hedge.glitch.me/api/v1/metadata?q=' + res[0].url.replace('https://', 'http://'), (station) => {
-			onMetadata(station)
-		})
-	}, 5000)
-		
-	  
+	  	np.play();
+		fetchInterval = setInterval(() => {
+			$.getJSON('https://protective-third-hedge.glitch.me/api/v1/metadata?q=' + res[0].url.replace('https://', 'http://'), (response) => {
+				onMetadata(response.data)
+			})
+		}, 5000)
 	})
-
 }
 
 function playpause() {
