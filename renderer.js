@@ -90,6 +90,8 @@ function player(uuid) {
 		}
 		document.getElementById('songy').innerText = res[0].name;
 		document.getElementById('radFav').src = res[0].favicon;
+		np = new IcecastMetadataPlayer( 'https://protective-third-hedge.glitch.me/api/v1/stream?q=' + res[0].url.replace('https://', 'http://'), { onMetadata } );
+	  	np.play();
 		function onMetadata(metadata) {
 			if(lastMeta == metadata.StreamTitle) return;
 			lastMeta = metadata.StreamTitle;
@@ -104,8 +106,6 @@ function player(uuid) {
 		}
 			
 		};
-		np = new IcecastMetadataPlayer( 'https://protective-third-hedge.glitch.me/api/v1/stream?q=' + res[0].url.replace('https://', 'http://'), { onMetadata } );
-	  	np.play();
 		fetchInterval = setInterval(() => {
 			$.getJSON('https://protective-third-hedge.glitch.me/api/v1/metadata?q=' + res[0].url.replace('https://', 'http://'), (response) => {
 				console.log(response)
