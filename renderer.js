@@ -90,8 +90,8 @@ function player(uuid) {
 		}
 		document.getElementById('songy').innerText = res[0].name;
 		document.getElementById('radFav').src = res[0].favicon;
-		np = new IcecastMetadataPlayer( 'https://protective-third-hedge.glitch.me/api/v1/stream?q=' + res[0].url.replace('https://', 'http://'), { onMetadata } );
-	  	np.play();
+		np = new IcecastMetadataPlayer( 'api/v1/stream?q=' + res[0].url.replace('https://', 'http://'), { onMetadata } );
+		np.play();
 		function onMetadata(metadata) {
 			if(lastMeta == metadata.StreamTitle) return;
 			lastMeta = metadata.StreamTitle;
@@ -107,8 +107,9 @@ function player(uuid) {
 			
 		};
 		fetchInterval = setInterval(() => {
-			$.getJSON('https://protective-third-hedge.glitch.me/api/v1/metadata?q=' + res[0].url.replace('https://', 'http://'), (response) => {
+			$.getJSON('api/v1/metadata?q=' + res[0].url.replace('https://', 'http://'), (response) => {
 				console.log(response)
+				console.log(np.state || np || 'Nout')
 				onMetadata(response)
 			})
 		}, 5000)
@@ -118,6 +119,7 @@ function player(uuid) {
 function playpause() {
 if(!np) return;
 if(np.state == "playing") {
+	console.log('Stopping')
 	np.stop();
 	document.getElementById('pauseplaybutton').className = "fa fa-play-circle";
 } else if(np.state == "stopped") {

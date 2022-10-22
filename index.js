@@ -24,6 +24,31 @@ request(param).pipe(res);
 })*/
 })
 
+var http = require("http");
+var cors = require('cors')
+var icy = require('icy')
+var corsOptions = {
+  origin: 'https://getradio.cyclic.app',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+app.use(cors(corsOptions))
+
+app.get('/api/v1/stream', (req, result) => {
+  result.set('Content-Type', 'audio/mpeg')
+icy.get(req.query.q, (res) => {
+  
+  res.pipe(result);
+})
+})
+
+app.get('/api/v1/metadata', (req, res) => {
+  icy.get(req.query.q, (rest) => {
+    rest.on('metadata', (metadata) => {
+      res.status(200).json(icy.parse(metadata))
+    })
+  })
+})
+
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 })
