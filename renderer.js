@@ -79,21 +79,26 @@ function myFunction(item, index) {
   }
 let np = null;
 let lastMeta = '';
+let fetchInterval = null;
 function player(uuid) {
 	$.getJSON('https://de1.api.radio-browser.info/json/stations/byuuid/' + uuid, (res) => {
 		console.log(uuid + `${res}`)
 		if(np) np.stop();
+		if(fetchInterval) {
+			clearInterval(fetchInterval);
+			fetchIntervall = null;
+		}
 		document.getElementById('songy').innerText = res[0].name;
 		document.getElementById('radFav').src = res[0].favicon;
-		const onMetadata = (metadata) => {
-			if(lastMeta == metadata.StreamTitle) return;
-			lastMeta = metadata.StreamTitle;
-			document.getElementById("track").innerText = metadata.StreamTitle || "No song data provided";
+		function onMetadata(metadata) {
+			if(lastMeta == metadata.title) return;
+			lastMeta = metadata.title;
+			document.getElementById("track").innerText = metadata.title || "No song data provided";
 		   
-			if(metadata.StreamTitle == '') return;
+			if(metadata.title == '') return;
 			if(document.cookie == "notifications=true") {
 			new Notification(res[0].name,{
-				body: metadata.StreamTitle,
+				body: metadata.title,
 				icon: res[0].favicon
 			});
 		}
@@ -101,9 +106,15 @@ function player(uuid) {
 		};
 		np = new IcecastMetadataPlayer( 'https://protective-third-hedge.glitch.me/api/v1/stream?q=' + res[0].url.replace('https://', 'http://'), { onMetadata } );
 	  np.play();
-  
+	fetchInterval = setInterval(() => {
+		$.getJSON('https://protective-third-hedge.glitch.me/api/v1/metadata?q=' + res[0].url.replace('https://', 'http://'), (station) => {
+			onMetadata(station)
+		})
+	}, 5000)
+		
 	  
 	})
+
 }
 
 function playpause() {
