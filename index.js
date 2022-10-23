@@ -3,6 +3,7 @@ const app = express();
 const path = require('path');
 const request = require('request');
 var internetradio = require('node-internet-radio')
+require("dotenv").config()
 
 app.all((req, res) => {
     console.log(req.originalUrl)
@@ -64,6 +65,7 @@ app.get('/:file', (req, res) => {
     res.sendFile(path.join(__dirname, req.params.file));
 })
 
-
-app.listen(3000);
-console.log('App listening now. Port: 3000')
+const PORT = process.env.PORT || 3000
+app.listen(PORT, () => {
+  console.log(`App listening now. Port: ${PORT}`)
+});
