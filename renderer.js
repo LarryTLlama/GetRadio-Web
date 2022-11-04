@@ -90,7 +90,8 @@ function player(uuid) {
 		}
 		document.getElementById('songy').innerText = res[0].name;
 		document.getElementById('radFav').src = res[0].favicon;
-		np = new IcecastMetadataPlayer( 'https://getradio.glitch.me/api/v1/stream?q=' + res[0].url.replace('https://', 'http://'), { onMetadata } );
+		np = new IcecastMetadataPlayer( 'https://getradio.vercel.app/api/v1/stream?q=' + res[0].url.replace('https://', 'http://'), { onMetadata } );
+		document.getElementById('pauseplaybutton').className = "fa fa-pause-circle";
 		np.play();
 		function onMetadata(metadata) {
 			if(lastMeta == metadata.title) return;
