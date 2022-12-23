@@ -52,7 +52,7 @@ app.get('/api/v1/metadata', (req, res) => {
 })
 
 app.get('/', (req, res) => {
-    reqs += 1;
+    reqs = reqs + 1;
     res.sendFile(path.join(__dirname, 'index.html'));
 })
 app.get('/reqs', (req, res) => {
