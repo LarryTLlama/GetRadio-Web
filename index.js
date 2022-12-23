@@ -3,6 +3,7 @@ const app = express();
 const path = require('path');
 const request = require('request');
 var internetradio = require('node-internet-radio')
+let reqs = 0;
 
 app.all((req, res) => {
     console.log(req.originalUrl)
@@ -28,7 +29,7 @@ var http = require("http");
 var cors = require('cors')
 var icy = require('icy')
 var corsOptions = {
-  origin: 'https://getradio.vercel.app',
+  origin: '.',
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 app.use(cors(corsOptions))
@@ -51,7 +52,11 @@ app.get('/api/v1/metadata', (req, res) => {
 })
 
 app.get('/', (req, res) => {
+    reqs += 1;
     res.sendFile(path.join(__dirname, 'index.html'));
+})
+app.get('/reqs', (req, res) => {
+  res.status(200).json({ requests: reqs })
 })
 
 app.get('/searchpage', (req, res) => {
