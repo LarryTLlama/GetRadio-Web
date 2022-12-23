@@ -56,6 +56,7 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 })
 app.get('/reqs', (req, res) => {
+  reqs = reqs + 1;
   res.status(200).json({ requests: reqs })
 })
 
