@@ -6,6 +6,8 @@ var internetradio = require('node-internet-radio')
 let reqs = 0;
 
 app.all((req, res) => {
+  
+  reqs = reqs + 1;
     console.log(req.originalUrl)
 })
 app.get('/api/v1/stream/', (req, res) => {
@@ -52,11 +54,9 @@ app.get('/api/v1/metadata', (req, res) => {
 })
 
 app.get('/', (req, res) => {
-    reqs = reqs + 1;
     res.sendFile(path.join(__dirname, 'index.html'));
 })
 app.get('/reqs', (req, res) => {
-  reqs = reqs + 1;
   res.status(200).json({ requests: reqs })
 })
 
