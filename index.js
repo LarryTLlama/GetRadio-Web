@@ -7,7 +7,7 @@ let reqs = 0;
 
 app.all((req, res) => {
   
-  reqs = reqs + 1;
+  
     console.log(req.originalUrl)
 })
 app.get('/api/v1/stream/', (req, res) => {
@@ -37,6 +37,7 @@ var corsOptions = {
 app.use(cors(corsOptions))
 
 app.get('/api/v1/stream', (req, result) => {
+  reqs = reqs + 1;
   result.set('Content-Type', 'audio/mpeg')
 icy.get(req.query.q, (res) => {
   
@@ -45,6 +46,7 @@ icy.get(req.query.q, (res) => {
 })
 
 app.get('/api/v1/metadata', (req, res) => {
+  reqs = reqs + 1;
   internetradio.getStationInfo(req.query.q, function(error, station) {
     if(error) {
         res.json({error: `${error}`})
@@ -54,17 +56,21 @@ app.get('/api/v1/metadata', (req, res) => {
 })
 
 app.get('/', (req, res) => {
+  reqs = reqs + 1;
     res.sendFile(path.join(__dirname, 'index.html'));
 })
 app.get('/reqs', (req, res) => {
+  reqs = reqs + 1;
   res.status(200).json({ requests: reqs })
 })
 
 app.get('/searchpage', (req, res) => {
+  reqs = reqs + 1;
     res.sendFile(path.join(__dirname, 'searchpage.html'))
 })
 
 app.get('/:file', (req, res) => {
+  reqs = reqs + 1;
     console.log(req.params.file);
     if(!req.params.file) return res.sendFile(path.join(__dirname, 'index.html'));
     res.sendFile(path.join(__dirname, req.params.file));
